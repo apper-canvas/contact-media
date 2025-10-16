@@ -2,8 +2,10 @@ import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ApperIcon from "@/components/ApperIcon";
 import { cn } from "@/utils/cn";
+import { useAuth } from "@/layouts/Root";
 
 const Sidebar = ({ isOpen, onClose }) => {
+  const { logout } = useAuth();
   const navigation = [
     { name: "Contacts", href: "/contacts", icon: "Users" },
     { name: "Companies", href: "/companies", icon: "Building2" },
@@ -44,9 +46,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       
 <div className="p-4 border-t border-navy/20">
         <button
-          onClick={() => {
-            const { useAuth } = require('@/layouts/Root');
-            const { logout } = useAuth();
+onClick={() => {
             logout();
           }}
           className="w-full mb-3 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded-md transition-colors flex items-center justify-center gap-2"
