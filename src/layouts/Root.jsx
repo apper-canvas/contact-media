@@ -76,9 +76,8 @@ export default function Root() {
 
       const { ApperUI } = window.ApperSDK;
 
-      ApperUI.setup(apperClient, {
+ApperUI.setup(apperClient, {
         target: "#authentication",
-        clientId: import.meta.env.VITE_APPER_PROJECT_ID,
         view: "both",
         onSuccess: handleAuthSuccess,
         onError: handleAuthError,

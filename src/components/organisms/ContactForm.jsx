@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import Button from "@/components/atoms/Button";
-import Input from "@/components/atoms/Input";
-import Select from "@/components/atoms/Select";
-import TextArea from "@/components/atoms/TextArea";
 import { contactService } from "@/services/api/contactService";
 import { companyService } from "@/services/api/companyService";
+import Button from "@/components/atoms/Button";
+import Select from "@/components/atoms/Select";
+import Input from "@/components/atoms/Input";
+import TextArea from "@/components/atoms/TextArea";
 
 const ContactForm = ({ contact, onSave, onCancel }) => {
 const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const [formData, setFormData] = useState({
   const [errors, setErrors] = useState({});
 
   // Load companies for dropdown
-  useState(() => {
+useEffect(() => {
     const loadCompanies = async () => {
       try {
         const data = await companyService.getAll();
