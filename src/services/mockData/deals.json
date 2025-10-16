@@ -1,0 +1,74 @@
+[
+  {
+    "Id": 1,
+    "title": "Enterprise Software License",
+    "value": 25000,
+    "status": "Negotiation",
+    "contactId": "1",
+    "companyId": "1",
+    "createdAt": "2024-01-25T10:30:00Z"
+  },
+  {
+    "Id": 2,
+    "title": "Design Tool Subscription",
+    "value": 1200,
+    "status": "Lead",
+    "contactId": "2",
+    "companyId": "2",
+    "createdAt": "2024-02-01T09:15:00Z"
+  },
+  {
+    "Id": 3,
+    "title": "Sustainability Consulting",
+    "value": 15000,
+    "status": "Closed-Won",
+    "contactId": "3",
+    "companyId": "3",
+    "createdAt": "2024-01-30T11:45:00Z"
+  },
+  {
+    "Id": 4,
+    "title": "Logistics Platform Integration",
+    "value": 45000,
+    "status": "Negotiation",
+    "contactId": "4",
+    "companyId": "4",
+    "createdAt": "2024-02-05T08:30:00Z"
+  },
+  {
+    "Id": 5,
+    "title": "Healthcare Management System",
+    "value": 75000,
+    "status": "Lead",
+    "contactId": "5",
+    "companyId": "5",
+    "createdAt": "2024-02-08T14:20:00Z"
+  },
+  {
+    "Id": 6,
+    "title": "Financial Reporting Dashboard",
+    "value": 8500,
+    "status": "Closed-Lost",
+    "contactId": "6",
+    "companyId": "6",
+    "createdAt": "2024-02-10T12:00:00Z"
+  },
+  {
+    "Id": 7,
+    "title": "Retail Operations Suite",
+    "value": 35000,
+    "status": "Negotiation",
+    "contactId": "7",
+    "companyId": "7",
+    "createdAt": "2024-02-15T16:45:00Z"
+  },
+  {
+    "Id": 8,
+    "title": "Project Management Software",
+    "value": 12000,
+    "status": "Lead",
+    "contactId": "8",
+    "companyId": "8",
+    "createdAt": "2024-02-20T07:15:00Z"
+  }
+]
