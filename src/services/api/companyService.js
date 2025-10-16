@@ -1,6 +1,4 @@
 import { getApperClient } from "@/services/apperClient";
-import React from "react";
-import Error from "@/components/ui/Error";
 
 class CompanyService {
   constructor() {
