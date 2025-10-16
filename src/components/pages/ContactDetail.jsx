@@ -82,10 +82,10 @@ const ContactDetail = () => {
               >
                 <ApperIcon name="ArrowLeft" className="w-5 h-5" />
               </button>
-              <Avatar name={contact.name} size="lg" />
+<Avatar name={contact.name_c} size="lg" />
               <div>
-                <h1 className="text-2xl font-bold">{contact.name}</h1>
-                <p className="text-white/80">{contact.company}</p>
+                <h1 className="text-2xl font-bold">{contact.name_c}</h1>
+                <p className="text-white/80">{contact.company_c}</p>
               </div>
             </div>
             
@@ -126,8 +126,8 @@ const ContactDetail = () => {
                     <a 
                       href={`mailto:${contact.email}`}
                       className="text-teal hover:underline"
-                    >
-                      {contact.email}
+>
+                      {contact.email_c}
                     </a>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ const ContactDetail = () => {
                       href={`tel:${contact.phone}`}
                       className="text-teal hover:underline"
                     >
-                      {formatPhone(contact.phone)}
+{formatPhone(contact.phone_c)}
                     </a>
                   </div>
                 </div>
@@ -148,8 +148,8 @@ const ContactDetail = () => {
                 <div className="flex items-center space-x-3">
                   <ApperIcon name="Building2" className="w-5 h-5 text-gray-400" />
                   <div>
-                    <p className="text-sm text-gray-500">Company</p>
-                    <p className="text-gray-900">{contact.company}</p>
+<p className="text-sm text-gray-500">Company</p>
+                    <p className="text-gray-900">{contact.company_c}</p>
                   </div>
                 </div>
               </div>
@@ -163,8 +163,8 @@ const ContactDetail = () => {
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Notes</p>
-                  <p className="text-gray-900 whitespace-pre-wrap">
-                    {contact.notes || "No notes available"}
+<p className="text-gray-900 whitespace-pre-wrap">
+                    {contact.notes_c || "No notes available"}
                   </p>
                 </div>
                 
@@ -172,7 +172,7 @@ const ContactDetail = () => {
                   <ApperIcon name="Calendar" className="w-5 h-5 text-gray-400" />
                   <div>
                     <p className="text-sm text-gray-500">Added</p>
-                    <p className="text-gray-900">{formatDate(contact.createdAt)}</p>
+<p className="text-gray-900">{formatDate(contact.created_at_c)}</p>
                   </div>
                 </div>
                 
@@ -180,7 +180,7 @@ const ContactDetail = () => {
                   <ApperIcon name="Clock" className="w-5 h-5 text-gray-400" />
                   <div>
                     <p className="text-sm text-gray-500">Last Updated</p>
-                    <p className="text-gray-900">{formatDate(contact.updatedAt)}</p>
+<p className="text-gray-900">{formatDate(contact.updated_at_c)}</p>
                   </div>
                 </div>
               </div>
@@ -216,7 +216,7 @@ const ContactDetail = () => {
             </div>
             <div>
               <h3 className="text-lg font-semibold text-gray-900">
-                Delete {contact.name}?
+Delete {contact.name_c}?
               </h3>
               <p className="text-gray-600">
                 This action cannot be undone. This contact will be permanently deleted.

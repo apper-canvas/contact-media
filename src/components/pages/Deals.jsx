@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import DealCard from "@/components/molecules/DealCard";
-import SearchBar from "@/components/molecules/SearchBar";
-import Button from "@/components/atoms/Button";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
-import ApperIcon from "@/components/ApperIcon";
 import { useSearch } from "@/hooks/useSearch";
 import { dealService } from "@/services/api/dealService";
 import { contactService } from "@/services/api/contactService";
 import { companyService } from "@/services/api/companyService";
+import ApperIcon from "@/components/ApperIcon";
+import Loading from "@/components/ui/Loading";
+import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import Button from "@/components/atoms/Button";
+import DealCard from "@/components/molecules/DealCard";
+import SearchBar from "@/components/molecules/SearchBar";
 
 const Deals = () => {
   const [deals, setDeals] = useState([]);
@@ -20,9 +20,9 @@ const Deals = () => {
   const [error, setError] = useState(null);
   const { searchValue = "" } = useOutletContext() || {};
 
-  const { searchTerm, setSearchTerm, filteredData } = useSearch(
+const { searchTerm, setSearchTerm, filteredData } = useSearch(
     deals,
-    ["title", "status"]
+    ["title_c", "status_c"]
   );
 
   // Sync with header search
@@ -53,21 +53,21 @@ const Deals = () => {
     loadData();
   }, []);
 
-  const getContactName = (contactId) => {
-    const contact = contacts.find(c => c.Id === parseInt(contactId));
-    return contact?.name || "Unknown Contact";
+const getContactName = (contactLookup) => {
+    if (!contactLookup) return "Unknown Contact";
+    return contactLookup.Name || "Unknown Contact";
   };
 
-  const getCompanyName = (companyId) => {
-    const company = companies.find(c => c.Id === parseInt(companyId));
-    return company?.name || "Unknown Company";
+const getCompanyName = (companyLookup) => {
+    if (!companyLookup) return "Unknown Company";
+    return companyLookup.Name || "Unknown Company";
   };
 
-  const dealsByStatus = {
-    "Lead": filteredData.filter(deal => deal.status === "Lead"),
-    "Negotiation": filteredData.filter(deal => deal.status === "Negotiation"),
-    "Closed-Won": filteredData.filter(deal => deal.status === "Closed-Won"),
-    "Closed-Lost": filteredData.filter(deal => deal.status === "Closed-Lost")
+const dealsByStatus = {
+    "Lead": filteredData.filter(deal => deal.status_c === "Lead"),
+    "Negotiation": filteredData.filter(deal => deal.status_c === "Negotiation"),
+    "Closed Won": filteredData.filter(deal => deal.status_c === "Closed Won"),
+    "Closed Lost": filteredData.filter(deal => deal.status_c === "Closed Lost")
   };
 
   const statusColors = {
@@ -143,11 +143,11 @@ const Deals = () => {
               
               <div className="space-y-3">
                 {statusDeals.map((deal) => (
-                  <DealCard
+<DealCard
                     key={deal.Id}
                     deal={deal}
-                    contactName={getContactName(deal.contactId)}
-                    companyName={getCompanyName(deal.companyId)}
+                    contactName={getContactName(deal.contact_id_c)}
+                    companyName={getCompanyName(deal.company_id_c)}
                   />
                 ))}
                 {statusDeals.length === 0 && (

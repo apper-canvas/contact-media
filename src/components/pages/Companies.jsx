@@ -16,9 +16,9 @@ const Companies = () => {
   const [error, setError] = useState(null);
   const { searchValue = "" } = useOutletContext() || {};
 
-  const { searchTerm, setSearchTerm, filteredData } = useSearch(
+const { searchTerm, setSearchTerm, filteredData } = useSearch(
     companies,
-    ["name", "industry"]
+    ["name_c", "industry_c"]
   );
 
   // Sync with header search

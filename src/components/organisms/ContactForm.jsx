@@ -8,12 +8,12 @@ import { contactService } from "@/services/api/contactService";
 import { companyService } from "@/services/api/companyService";
 
 const ContactForm = ({ contact, onSave, onCancel }) => {
-  const [formData, setFormData] = useState({
-    name: contact?.name || "",
-    email: contact?.email || "",
-    phone: contact?.phone || "",
-    company: contact?.company || "",
-    notes: contact?.notes || ""
+const [formData, setFormData] = useState({
+    name_c: contact?.name_c || "",
+    email_c: contact?.email_c || "",
+    phone_c: contact?.phone_c || "",
+    company_c: contact?.company_c || "",
+    notes_c: contact?.notes_c || ""
   });
 
   const [companies, setCompanies] = useState([]);
@@ -85,20 +85,13 @@ const ContactForm = ({ contact, onSave, onCancel }) => {
     
     try {
       let savedContact;
-      if (contact?.Id) {
+if (contact?.Id) {
         // Update existing contact
-        savedContact = await contactService.update(contact.Id, {
-          ...formData,
-          updatedAt: new Date().toISOString()
-        });
+        savedContact = await contactService.update(contact.Id, formData);
         toast.success("Contact updated successfully!");
       } else {
         // Create new contact
-        savedContact = await contactService.create({
-          ...formData,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        });
+        savedContact = await contactService.create(formData);
         toast.success("Contact created successfully!");
       }
       
@@ -171,9 +164,9 @@ const ContactForm = ({ contact, onSave, onCancel }) => {
             error={errors.company}
           >
             <option value="">Select a company</option>
-            {companies.map((company) => (
-              <option key={company.Id} value={company.name}>
-                {company.name}
+{companies.map((company) => (
+              <option key={company.Id} value={company.name_c}>
+                {company.name_c}
               </option>
             ))}
           </Select>

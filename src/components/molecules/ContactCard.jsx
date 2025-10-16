@@ -16,22 +16,22 @@ const ContactCard = ({ contact }) => {
       className="bg-white rounded-lg border border-gray-200 p-4 card-hover cursor-pointer transition-all duration-200"
     >
       <div className="flex items-center space-x-4">
-        <Avatar name={contact.name} size="md" />
+<Avatar name={contact.name_c} size="md" />
         <div className="flex-1 min-w-0">
           <h3 className="text-sm font-semibold text-gray-900 truncate">
-            {contact.name}
+{contact.name_c}
           </h3>
           <div className="flex items-center space-x-1 text-sm text-gray-500">
-            <ApperIcon name="Mail" className="w-4 h-4" />
-            <span className="truncate">{contact.email}</span>
+<ApperIcon name="Mail" className="w-4 h-4" />
+            <span className="truncate">{contact.email_c}</span>
           </div>
           <div className="flex items-center space-x-1 text-sm text-gray-500">
-            <ApperIcon name="Phone" className="w-4 h-4" />
-            <span>{formatPhone(contact.phone)}</span>
+<ApperIcon name="Phone" className="w-4 h-4" />
+            <span>{formatPhone(contact.phone_c)}</span>
           </div>
         </div>
         <div className="text-right">
-          <p className="text-sm text-gray-900 font-medium">{contact.company}</p>
+<p className="text-sm text-gray-900 font-medium">{contact.company_c}</p>
           <ApperIcon name="ChevronRight" className="w-4 h-4 text-gray-400 ml-auto mt-1" />
         </div>
       </div>

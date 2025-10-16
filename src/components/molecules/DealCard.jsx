@@ -14,12 +14,12 @@ const DealCard = ({ deal, contactName, companyName }) => {
     >
       <div className="space-y-3">
         <div className="flex items-start justify-between">
-          <h4 className="font-semibold text-gray-900 text-sm">{deal.title}</h4>
-          <Badge variant={deal.status}>{deal.status}</Badge>
+<h4 className="font-semibold text-gray-900 text-sm">{deal.title_c}</h4>
+          <Badge variant={deal.status_c}>{deal.status_c}</Badge>
         </div>
         
-        <div className="text-lg font-bold text-navy">
-          {formatCurrency(deal.value)}
+<div className="text-lg font-bold text-navy">
+          {formatCurrency(deal.value_c)}
         </div>
         
         <div className="flex items-center space-x-2">
@@ -31,7 +31,7 @@ const DealCard = ({ deal, contactName, companyName }) => {
         </div>
         
         <div className="text-xs text-gray-500">
-          Created {formatDate(deal.createdAt)}
+Created {formatDate(deal.created_at_c)}
         </div>
       </div>
     </motion.div>

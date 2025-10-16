@@ -19,9 +19,9 @@ const Contacts = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const { searchValue = "" } = useOutletContext() || {};
 
-  const { searchTerm, setSearchTerm, filteredData } = useSearch(
+const { searchTerm, setSearchTerm, filteredData } = useSearch(
     contacts,
-    ["name", "email", "phone", "company"]
+    ["name_c", "email_c", "phone_c", "company_c"]
   );
 
   // Sync with header search

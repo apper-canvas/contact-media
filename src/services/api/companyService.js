@@ -1,68 +1,185 @@
-import companiesData from "@/services/mockData/companies.json";
-
-// Simulate API delay
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+import { getApperClient } from "@/services/apperClient";
+import React from "react";
+import Error from "@/components/ui/Error";
 
 class CompanyService {
   constructor() {
-    this.companies = [...companiesData];
+    this.tableName = "company_c";
+    this.fields = [
+      { field: { Name: "name_c" } },
+      { field: { Name: "industry_c" } },
+      { field: { Name: "contact_count_c" } },
+      { field: { Name: "created_at_c" } }
+    ];
   }
 
   async getAll() {
-    await delay(300);
-    return [...this.companies];
+    try {
+      const apperClient = getApperClient();
+      if (!apperClient) {
+        throw new Error("ApperClient not initialized");
+      }
+
+      const params = {
+        fields: this.fields,
+        pagingInfo: { limit: 1000, offset: 0 }
+      };
+
+      const response = await apperClient.fetchRecords(this.tableName, params);
+
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      return response.data || [];
+    } catch (error) {
+      console.error("Error fetching companies:", error?.message || error);
+      throw error;
+    }
   }
 
   async getById(id) {
-    await delay(200);
-    const company = this.companies.find(company => company.Id === parseInt(id));
-    return company ? { ...company } : null;
+    try {
+      const apperClient = getApperClient();
+      if (!apperClient) {
+        throw new Error("ApperClient not initialized");
+      }
+
+      const params = {
+        fields: this.fields
+      };
+
+      const response = await apperClient.getRecordById(this.tableName, parseInt(id), params);
+
+      if (!response.success) {
+        console.error(response.message);
+        return null;
+      }
+
+      return response.data || null;
+    } catch (error) {
+      console.error(`Error fetching company ${id}:`, error?.message || error);
+      return null;
+    }
   }
 
   async create(companyData) {
-    await delay(400);
-    const maxId = this.companies.length > 0 
-      ? Math.max(...this.companies.map(company => company.Id))
-      : 0;
-    
-    const newCompany = {
-      ...companyData,
-      Id: maxId + 1,
-      contactCount: 0,
-      createdAt: new Date().toISOString()
-    };
-    
-    this.companies.unshift(newCompany);
-    return { ...newCompany };
+    try {
+      const apperClient = getApperClient();
+      if (!apperClient) {
+        throw new Error("ApperClient not initialized");
+      }
+
+      // Only include Updateable fields
+      const params = {
+        records: [
+          {
+            name_c: companyData.name_c || "",
+            industry_c: companyData.industry_c || "",
+            contact_count_c: companyData.contact_count_c || 0,
+            created_at_c: new Date().toISOString()
+          }
+        ]
+      };
+
+      const response = await apperClient.createRecord(this.tableName, params);
+
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results && response.results.length > 0) {
+        const result = response.results[0];
+        if (result.success) {
+          return result.data;
+        } else {
+          throw new Error(result.message || "Failed to create company");
+        }
+      }
+
+      throw new Error("No response data");
+    } catch (error) {
+      console.error("Error creating company:", error?.message || error);
+      throw error;
+    }
   }
 
   async update(id, updateData) {
-    await delay(400);
-    const index = this.companies.findIndex(company => company.Id === parseInt(id));
-    
-    if (index === -1) {
-      throw new Error("Company not found");
+    try {
+      const apperClient = getApperClient();
+      if (!apperClient) {
+        throw new Error("ApperClient not initialized");
+      }
+
+      // Only include Updateable fields
+      const params = {
+        records: [
+          {
+            Id: parseInt(id),
+            name_c: updateData.name_c,
+            industry_c: updateData.industry_c,
+            contact_count_c: updateData.contact_count_c
+          }
+        ]
+      };
+
+      const response = await apperClient.updateRecord(this.tableName, params);
+
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results && response.results.length > 0) {
+        const result = response.results[0];
+        if (result.success) {
+          return result.data;
+        } else {
+          throw new Error(result.message || "Failed to update company");
+        }
+      }
+
+      throw new Error("No response data");
+    } catch (error) {
+      console.error("Error updating company:", error?.message || error);
+      throw error;
     }
-    
-    this.companies[index] = {
-      ...this.companies[index],
-      ...updateData,
-      Id: parseInt(id)
-    };
-    
-    return { ...this.companies[index] };
   }
 
   async delete(id) {
-    await delay(300);
-    const index = this.companies.findIndex(company => company.Id === parseInt(id));
-    
-    if (index === -1) {
-      throw new Error("Company not found");
+    try {
+      const apperClient = getApperClient();
+      if (!apperClient) {
+        throw new Error("ApperClient not initialized");
+      }
+
+      const params = {
+        RecordIds: [parseInt(id)]
+      };
+
+      const response = await apperClient.deleteRecord(this.tableName, params);
+
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results && response.results.length > 0) {
+        const result = response.results[0];
+        if (result.success) {
+          return { success: true };
+        } else {
+          throw new Error(result.message || "Failed to delete company");
+        }
+      }
+
+      throw new Error("No response data");
+    } catch (error) {
+console.error("Error deleting company:", error?.message || error);
+      throw error;
     }
-    
-    const deletedCompany = this.companies.splice(index, 1)[0];
-    return { ...deletedCompany };
   }
 }
 
