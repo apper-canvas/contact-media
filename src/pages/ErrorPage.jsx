@@ -7,7 +7,7 @@ const ErrorPage = () => {
   const isPublicProfileError = errorMessage.toLowerCase().includes('public profile');
   
   return (
-<div className="min-h-screen flex items-center justify-center bg-background px-4">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
         <div className="flex justify-center mb-4">
           <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
